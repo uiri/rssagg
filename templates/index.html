@@ -1,5 +1,6 @@
 <head>
   <title>Fresh Fucks</title>
+  <link type="image/png" rel="icon" href="/static/favicon.png">
   <style type="text/css">
     .links {
 	text-align:left;
@@ -41,7 +42,7 @@
   <div class='links'>
     <div class='header'><strong>F R E S H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; F U C K S</strong></div>
     {% for i in range(30) %}
-    {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}{{votes[i]}}&nbsp;<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br>{% endautoescape %}
+    {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br>{% endautoescape %}
     {% endfor %}
   </div>
 </body>

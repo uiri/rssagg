@@ -58,7 +58,6 @@ def index():
     vals = {}
     titles = []
     links = []
-    displayvotes = []
     if (int(time.time()) - app.lastcheck) > 3600:
         refresh()
     for i in xrange(len(app.titlebydate)):
@@ -71,7 +70,7 @@ def index():
             displayvotes.append(app.votes[title])
         else:
             break
-    return render_template("index.html", titles=titles, links=links, votes=displayvotes)
+    return render_template("index.html", titles=titles, links=links)
 
 if __name__ == '__main__':
     refresh()
