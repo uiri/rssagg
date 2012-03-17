@@ -18,6 +18,7 @@ def refresh():
     votetitle = []
     datetitle = []
     for feed in feeds:
+        print "Reading " + feed
         d = feedparser.parse(feed)
         offset = 0
         if time.mktime(d.entries[0].date_parsed) > time.time():
@@ -52,24 +53,30 @@ def calc(vote, index):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    print "index request"
     if request.method == 'POST':
         plusoneto = request.form.get('l', '')
+        print "incrementing vote on " + plusoneto
         app.votes[plusoneto] += 1
     vals = {}
     titles = []
     links = []
     if (int(time.time()) - app.lastcheck) > 3600:
+        print "Refreshing..."
         refresh()
     for i in xrange(len(app.titlebydate)):
         vals[app.titlebydate[i]] = calc(app.votes[app.titlebydate[i]], i)
     sortedvals = sorted(vals, key=vals.get, reverse=True)
     for title in sortedvals:
         if len(titles) < 30:
+            print "Adding " + title + " to arrays"
             titles.append(title)
             links.append(app.title2url[title])
             displayvotes.append(app.votes[title])
         else:
+            print "Here's the break"
             break
+    print "Rendering..."
     return render_template("index.html", titles=titles, links=links)
 
 if __name__ == '__main__':
