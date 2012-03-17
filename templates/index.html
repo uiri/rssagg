@@ -1,0 +1,47 @@
+<head>
+  <title>Fresh Fucks</title>
+  <style type="text/css">
+    .links {
+	text-align:left;
+	margin-left:auto;
+	margin-right:auto;
+	width:85%;
+	background-color:#fcc;
+	padding:10px;
+	padding-top:0px;
+	color:#006;
+	border-bottom-left-radius:25px;
+	border-bottom-right-radius:25px;
+    }
+    
+    .header {
+	width:100%;
+	color:#F90;
+	background-color:#f33;
+	text-align:center;
+    }
+    a {
+	color:#006;
+    }
+  </style>
+  <script type="text/javascript">
+    function votefor(link) {
+	var votedata = new FormData();
+	votedata.append("l", link);
+	var req = new XMLHttpRequest();
+	req.open('POST', "/", false);
+	req.send(votedata);
+	if (req.status == 200) {
+	    document.write(req.responseText);
+	}
+    }
+  </script>
+</head>
+<body>
+  <div class='links'>
+    <div class='header'><strong>F R E S H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; F U C K S</strong></div>
+    {% for i in range(30) %}
+    {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}{{votes[i]}}&nbsp;<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br>{% endautoescape %}
+    {% endfor %}
+  </div>
+</body>
