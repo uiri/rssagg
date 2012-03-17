@@ -2,22 +2,39 @@
   <title>Fresh Fucks</title>
   <link type="image/png" rel="icon" href="/static/favicon.png">
   <style type="text/css">
-    .links {
-	text-align:left;
+    body {
+	margin-top:0px;
+	height:100%;
+    }
+    html {
+	height:100%;
+    }
+
+    .centered {
+	width:85%;
+	height:100%;
 	margin-left:auto;
 	margin-right:auto;
-	width:85%;
+	top:0;
+    }
+	
+    .links {
+	text-align:left;
+	margin-top:0px;
+	margin-bottom:0px;
 	background-color:#fcc;
-	padding:10px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:10px;
 	padding-top:0px;
 	color:#006;
-	border-bottom-left-radius:25px;
-	border-bottom-right-radius:25px;
     }
     
     .header {
 	width:100%;
-	color:#F90;
+	margin:0;
+	padding:0;
+	color:#FFC;
 	background-color:#f33;
 	text-align:center;
     }
@@ -39,10 +56,11 @@
   </script>
 </head>
 <body>
-  <div class='links'>
+  <div class='centered'>
     <div class='header'><strong>F R E S H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; F U C K S</strong></div>
-    {% for i in range(30) %}
-    {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br>{% endautoescape %}
-    {% endfor %}
+    <div class='links'>
+      {% for i in range(30) %}
+      {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br><span style='height:0.5em;font-size:5px'>&nbsp;</span><br>{% endautoescape %}{% endfor %}
+    </div>
   </div>
 </body>
