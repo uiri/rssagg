@@ -11,7 +11,7 @@ with open("urllist.conf") as conf:
         feeds.append(line)
 app.title2url = {}
 app.titlebydate = []
-app.lastcheck = time.time()
+app.lastcheck = 0
 
 def refresh():
     linktitle = []
@@ -73,6 +73,5 @@ def index():
     return render_template("index.html", titles=titles, links=links)
 
 if __name__ == '__main__':
-    refresh()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
