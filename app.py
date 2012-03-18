@@ -2,20 +2,19 @@ from flask import Flask, render_template, request
 import feedparser, os, time, copy, threading
 
 app = Flask(__name__)
-feeds = []
 app.votes = {}
-app.debug = True
 feeds = []
 with open("urllist.conf") as conf:
     for line in conf:
         feeds.append(line)
+app.debug = True
+items to be more appropriate
 app.title2url = {}
 app.titlebydate = []
 app.lastcheck = 0
 
 def refresh():
     linktitle = []
-    votetitle = []
     datetitle = []
     for feed in feeds:
         print "Reading " + feed
@@ -33,39 +32,21 @@ def refresh():
                     break
             if [entry.title, realdate] not in datetitle:
                 datetitle.append([entry.title, realdate])
-            if app.votes != {}:
-                if entry.title in app.votes:
-                    votetitle.append([entry.title, app.votes[entry.title]])
-                else:
-                    votetitle.append([entry.title, 1])
-            else:
-                votetitle.append([entry.title, 1])
     app.titlebydate = []
     for i in xrange(len(datetitle)):
         app.titlebydate.append(datetitle[i][0])
-    app.votes = dict(votetitle)
     app.title2url = dict(linktitle)
     app.lastcheck = int(time.time())
 
-def calc(vote, index):
-    index += 1
-    return vote / pow(index, 0.2)
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        plusoneto = request.form.get('l', '')
-        app.votes[plusoneto] += 1
-    vals = {}
+    print request.headers['user-agent']
     titles = []
     links = []
-    if (int(time.time()) - app.lastcheck) > 3600:
+    if (int(time.time()) - app.lastcheck) > 3500:
         refresh()
         app.lastcheck = time.time()
-    for i in xrange(len(app.titlebydate)):
-        vals[app.titlebydate[i]] = calc(app.votes[app.titlebydate[i]], i)
-    sortedvals = sorted(vals, key=vals.get, reverse=True)
-    for title in sortedvals:
+    for title in app.titlebydate:
         if len(titles) < 30:
             titles.append(title)
             links.append(app.title2url[title])

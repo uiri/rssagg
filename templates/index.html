@@ -60,7 +60,7 @@
     <div class='header'><strong>F R E S H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; F U C K S</strong></div>
     <div class='links'>
       {% for i in range(30) %}
-      {{i+1}}. &nbsp;&nbsp;&nbsp;&nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}<a href='#' onclick='votefor("{{titles[i]}}")'><img src='/static/grayarrow.gif'></a>&nbsp;&nbsp;&nbsp;<a href='{{links[i]}}'>{{titles[i]}}</a><br><span style='height:0.5em;font-size:5px'>&nbsp;</span><br>{% endautoescape %}{% endfor %}
+      {{i+1}}. &nbsp;{% if i<9 %}&nbsp;&nbsp;{% endif %}{%autoescape off%}<a href='{{links[i]}}'>{{titles[i]}}</a><br><div style="height:0.5em;"></div>{% endautoescape %}{% endfor %}
     </div>
   </div>
 </body>
